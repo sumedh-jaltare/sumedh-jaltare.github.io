@@ -15,7 +15,7 @@ const navLinks = [
   { label: 'Contact', href: '#contact' },
 ]
 
-const Navbar = () => {
+const Navbar = ({ theme, onToggleTheme }) => {
   const [activeHref, setActiveHref] = useState('#hero')
 
   useEffect(() => {
@@ -94,13 +94,24 @@ const Navbar = () => {
           ))}
         </ul>
 
-        <a
-          href="#contact"
-          onClick={(event) => handleNavClick(event, '#contact')}
-          className="hidden rounded-full border border-cyan-300/40 bg-cyan-400/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.15em] text-cyan-100 transition hover:border-cyan-200 hover:bg-cyan-300/20 sm:inline-flex"
-        >
-          Let's Connect
-        </a>
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={onToggleTheme}
+            className="rounded-full border border-white/20 bg-white/5 px-3 py-2 text-xs font-semibold uppercase tracking-[0.1em] text-slate-100 transition hover:border-cyan-300/60 hover:text-cyan-100"
+            aria-label="Toggle theme"
+          >
+            {theme === 'dark' ? 'Light' : 'Dark'}
+          </button>
+
+          <a
+            href="#contact"
+            onClick={(event) => handleNavClick(event, '#contact')}
+            className="hidden rounded-full border border-cyan-300/40 bg-cyan-400/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.15em] text-cyan-100 transition hover:border-cyan-200 hover:bg-cyan-300/20 sm:inline-flex"
+          >
+            Let's Connect
+          </a>
+        </div>
         </div>
 
       <div className="mt-3 flex gap-2 overflow-x-auto border-t border-white/10 pt-3 md:hidden [&::-webkit-scrollbar]:hidden">

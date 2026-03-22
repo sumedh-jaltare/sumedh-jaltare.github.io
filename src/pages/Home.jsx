@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import About from '../components/About'
 import Achievements from '../components/Achievements'
@@ -20,8 +21,29 @@ const sectionTransition = {
 }
 
 const Home = () => {
+  const [theme, setTheme] = useState('dark')
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('portfolio-theme')
+    const nextTheme = savedTheme === 'light' ? 'light' : 'dark'
+    setTheme(nextTheme)
+  }, [])
+
+  useEffect(() => {
+    const root = document.documentElement
+    root.classList.toggle('light', theme === 'light')
+    root.classList.toggle('dark', theme === 'dark')
+    localStorage.setItem('portfolio-theme', theme)
+  }, [theme])
+
+  const toggleTheme = () => {
+    setTheme((currentTheme) =>
+      currentTheme === 'dark' ? 'light' : 'dark',
+    )
+  }
+
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-slate-950 text-slate-100">
+    <div className="relative min-h-screen overflow-x-hidden bg-slate-950 text-slate-100 transition-colors duration-300">
       <div className="pointer-events-none absolute inset-0 z-0">
         <motion.div
           animate={{ x: [0, 34, 0], y: [0, 22, 0] }}
@@ -42,7 +64,7 @@ const Home = () => {
       </div>
 
       <div className="relative z-10">
-        <Navbar />
+        <Navbar theme={theme} onToggleTheme={toggleTheme} />
         <main>
           <MotionDiv {...sectionTransition}>
             <Hero />
