@@ -2,13 +2,13 @@
   "name": "portfolio",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://sumedh-jaltare.github.io/portfolio",
+  "homepage": "https://sumedh-jaltare.github.io",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist -r ${GH_PAGES_REPO:-https://github.com/sumedh-jaltare/portfolio.git}",
+    "deploy": "gh-pages -d dist -r ${GH_PAGES_REPO:-https://github.com/sumedh-jaltare/sumedh-jaltare.github.io.git}",
     "lint": "eslint .",
     "preview": "vite preview"
   },
