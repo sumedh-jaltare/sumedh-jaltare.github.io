@@ -66,7 +66,7 @@ const Navbar = ({ theme, onToggleTheme }) => {
       transition={{ duration: 0.5 }}
       className="fixed inset-x-0 top-3 z-50 px-3 sm:px-6 lg:px-8"
     >
-      <nav className="pointer-events-auto w-full rounded-2xl border border-white/15 bg-slate-950/70 px-4 py-4 shadow-[0_14px_50px_-20px_rgba(56,189,248,0.4)] backdrop-blur-2xl sm:px-6 lg:px-8">
+      <nav className="pointer-events-auto mx-auto w-full max-w-6xl rounded-2xl border border-white/15 bg-slate-950/70 px-4 py-4 shadow-[0_14px_50px_-20px_rgba(56,189,248,0.4)] backdrop-blur-2xl sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
         <a
           href="#hero"

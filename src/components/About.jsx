@@ -13,7 +13,7 @@ const focusAreas = [
 const About = () => {
   return (
     <section id="about" className="px-4 py-16 sm:px-6 lg:px-8">
-      <div className="w-full">
+      <div className="mx-auto max-w-6xl">
         <SectionHeader
           badge="About"
           title="Execution-focused full-stack developer with product ownership"

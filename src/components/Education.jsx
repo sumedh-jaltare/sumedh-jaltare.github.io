@@ -6,7 +6,7 @@ const MotionArticle = motion.article
 const Education = () => {
   return (
     <section id="education" className="px-4 py-16 sm:px-6 lg:px-8">
-      <div className="w-full">
+      <div className="mx-auto max-w-6xl">
         <SectionHeader
           badge="Education"
           title="Academic background in Information Technology"
