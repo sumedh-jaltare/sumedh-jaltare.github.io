@@ -43,7 +43,7 @@ const Home = () => {
   }
 
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-slate-950 text-slate-100 transition-colors duration-300">
+    <div className="relative bg-slate-950 text-slate-100 transition-colors duration-300">
       <div className="pointer-events-none absolute inset-0 z-0">
         <motion.div
           animate={{ x: [0, 34, 0], y: [0, 22, 0] }}
