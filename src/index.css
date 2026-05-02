@@ -13,13 +13,16 @@ html.light {
 }
 
 html {
+  height: 100%;
   scroll-behavior: smooth;
   scroll-padding-top: 7.5rem;
 }
 
 body {
   margin: 0;
-  min-height: 100vh;
+  height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   font-family: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
   background:
     radial-gradient(circle at 12% 18%, rgba(56, 189, 248, 0.22), transparent 45%),
@@ -39,8 +42,10 @@ html.light body {
   color: #0f172a;
 }
 
+/* Ensure root fills viewport and is the single scrolling container */
 #root {
-  min-height: 100vh;
+  min-height: 100%;
+  height: 100%;
 }
 
 section {
