@@ -30,7 +30,7 @@ const experienceItems = [
 const Experience = () => {
   return (
     <section id="experience" className="px-4 py-16 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-6xl">
+      <div className="w-full">
         <SectionHeader
           badge="Experience"
           title="Leadership and execution across technical and design roles"

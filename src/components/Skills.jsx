@@ -129,7 +129,7 @@ const skillItems = [
 const Skills = () => {
   return (
     <section id="skills" className="px-4 py-16 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-6xl">
+      <div className="w-full">
         <SectionHeader
           badge="Skills"
           title="Technical stack used across frontend, backend, and AI-enabled products"

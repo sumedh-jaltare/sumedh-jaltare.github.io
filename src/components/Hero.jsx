@@ -75,13 +75,13 @@ const Hero = () => {
 
   return (
     <section id="hero" className="px-4 pb-20 pt-20 sm:px-6 lg:px-8 lg:pt-28">
-      <div className="mx-auto grid max-w-6xl items-center gap-12 lg:min-h-[calc(100vh-5rem)] lg:grid-cols-[1.15fr_0.85fr]">
+      <div className="grid w-full items-center gap-12 lg:min-h-[calc(100vh-5rem)] lg:grid-cols-[1.15fr_0.85fr]">
         <MotionDiv
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
-          className="max-w-3xl"
+          className="w-full"
         >
           <span className="inline-flex items-center rounded-full border border-cyan-300/30 bg-cyan-400/10 px-4 py-1.5 font-mono text-xs font-medium uppercase tracking-[0.18em] text-cyan-200">
             Full-Stack Developer
@@ -93,7 +93,7 @@ const Hero = () => {
               <span className="typing-cursor">|</span>
             </span>
           </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-300">
+          <p className="mt-6 text-lg leading-relaxed text-slate-300">
             I am Sumedh Jaltare, a full-stack developer experienced in building
             scalable web applications with React, Node.js, and FastAPI. I focus on
             secure backend architecture, practical product delivery, and end-to-end
