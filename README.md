@@ -2,15 +2,17 @@
 
 Modern developer portfolio built with React + Vite and styled with Tailwind CSS.
 
+Live site: `https://sumedh-jaltare.github.io/`
+
 ## Highlights
 
-- Dark mode by default + light mode toggle
+- Dark mode by default with a light mode toggle
 - Fully responsive, mobile-first layout
-- Smooth animations with Framer Motion
-- Component-based structure
-- GitHub Pages-ready deployment setup
+- Smooth section animations with Framer Motion
+- Component-based architecture
+- GitHub profile and repository data integration
 
-## Sections Included
+## Sections
 
 - Hero
 - About
@@ -27,7 +29,7 @@ Modern developer portfolio built with React + Vite and styled with Tailwind CSS.
 - React 19
 - Vite 8
 - Tailwind CSS 3
-- React Router
+- React Router (HashRouter)
 - Framer Motion
 - GitHub REST API
 
@@ -35,25 +37,13 @@ Modern developer portfolio built with React + Vite and styled with Tailwind CSS.
 
 ```text
 src/
-	components/
-		Navbar.jsx
-		Hero.jsx
-		About.jsx
-		Skills.jsx
-		Projects.jsx
-		ProjectCard.jsx
-		GitHubSection.jsx
-		Experience.jsx
-		Achievements.jsx
-		Education.jsx
-		Contact.jsx
-		SectionHeader.jsx
-	pages/
-		Home.jsx
-	lib/
-		githubApi.js
-	App.jsx
-	main.jsx
+  components/
+  pages/
+  lib/
+  App.jsx
+  main.jsx
+.github/workflows/
+  static.yml
 ```
 
 ## Local Development
@@ -65,17 +55,17 @@ npm run dev
 
 Open: `http://localhost:5173`
 
-## Scripts
+## Available Scripts
 
-- `npm run dev` — start development server
-- `npm run build` — create production build
-- `npm run preview` — preview production build locally
-- `npm run lint` — run lint checks
-- `npm run deploy` — deploy `dist` to GitHub Pages using `gh-pages`
+- `npm run dev` - start local development server
+- `npm run build` - create production build in `dist/`
+- `npm run preview` - preview production build locally
+- `npm run lint` - run ESLint
+- `npm run deploy` - publish `dist/` using `gh-pages`
 
 ## Environment Variables (Optional)
 
-Create a `.env` file in the root only if needed:
+Create a `.env` file if needed:
 
 ```env
 VITE_GITHUB_USERNAME=sumedh-jaltare
@@ -83,20 +73,22 @@ VITE_GITHUB_TOKEN=your_optional_github_token
 ```
 
 - `VITE_GITHUB_USERNAME` defaults to `sumedh-jaltare`
-- `VITE_GITHUB_TOKEN` helps avoid GitHub API rate limits
+- `VITE_GITHUB_TOKEN` helps reduce GitHub API rate-limit issues
 
-## GitHub Pages Notes
+## Deployment
 
-- Vite base path is configured for a repo deployment (`/portfolio/`).
-- Router is configured with `HashRouter` for GitHub Pages compatibility.
+This repo includes two deployment paths:
 
-Deploy:
+1. GitHub Actions Pages workflow:
+   - Workflow file: `.github/workflows/static.yml`
+   - Runs on pushes to `main`
+   - Builds with `npm run build` and deploys `dist/` to GitHub Pages
+2. Manual publish with `gh-pages`:
+   - Run `npm run deploy`
+   - Default target repo:
+     `https://github.com/sumedh-jaltare/sumedh-jaltare.github.io.git`
 
-```bash
-npm run build
-npm run deploy
-```
+## Notes
 
-Default deploy target:
-
-`https://github.com/sumedh-jaltare/portfolio.git`
+- Vite base path is configured as `/` in `vite.config.js`.
+- Router is configured with `HashRouter` in `src/main.jsx` for reliable GitHub Pages routing.
