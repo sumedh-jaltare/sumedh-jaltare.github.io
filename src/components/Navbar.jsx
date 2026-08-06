@@ -48,7 +48,7 @@ const Navbar = () => {
               <a
                 href={link.href}
                 onClick={(event) => handleNavClick(event, link.href)}
-                className="link-underline font-sans text-[13px] font-normal tracking-wide text-ink"
+                className="link-underline font-sans text-[15px] font-semibold tracking-wide text-ink md:text-[16px]"
               >
                 {link.label}
               </a>
@@ -75,7 +75,7 @@ const Navbar = () => {
                 <a
                   href={link.href}
                   onClick={(event) => handleNavClick(event, link.href)}
-                  className="font-display text-3xl font-light text-ink"
+                  className="font-display text-3xl font-semibold text-ink"
                 >
                   {link.label}
                 </a>

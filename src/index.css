@@ -71,6 +71,13 @@ section {
   border-left: 1px solid #f2f2f2;
 }
 
+[data-hero-grid],
+[data-hero-grid] * {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%23ffffff' stroke='%23111111' stroke-width='1.25' stroke-linejoin='round' d='M5 3v17.5l4.8-4.7 2.8 6.7 2.4-1-2.8-6.7H19z'/%3E%3C/svg%3E")
+      3 3,
+    crosshair;
+}
+
 .hero-grid-cell {
   box-sizing: border-box;
   width: 72px;
