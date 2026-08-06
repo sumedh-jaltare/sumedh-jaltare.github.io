@@ -1,166 +1,110 @@
 import { motion } from 'framer-motion'
-import SectionHeader from './SectionHeader'
-
-const MotionArticle = motion.article
-
-const skillItems = [
-  {
-    name: 'JavaScript',
-    category: 'Language',
-    icon: 'https://cdn.simpleicons.org/javascript/F7DF1E',
-  },
-  {
-    name: 'TypeScript',
-    category: 'Language',
-    icon: 'https://cdn.simpleicons.org/typescript/3178C6',
-  },
-  {
-    name: 'Python',
-    category: 'Language',
-    icon: 'https://cdn.simpleicons.org/python/3776AB',
-  },
-  {
-    name: 'SQL',
-    category: 'Language',
-    icon: 'https://cdn.simpleicons.org/postgresql/4169E1',
-  },
-  {
-    name: 'React.js',
-    category: 'Frontend',
-    icon: 'https://cdn.simpleicons.org/react/61DAFB',
-  },
-  {
-    name: 'Vite',
-    category: 'Frontend',
-    icon: 'https://cdn.simpleicons.org/vite/646CFF',
-  },
-  {
-    name: 'HTML',
-    category: 'Frontend',
-    icon: 'https://cdn.simpleicons.org/html5/E34F26',
-  },
-  {
-    name: 'CSS',
-    category: 'Frontend',
-    icon: 'https://cdn.simpleicons.org/css3/1572B6',
-  },
-  {
-    name: 'Tailwind CSS',
-    category: 'Frontend',
-    icon: 'https://cdn.simpleicons.org/tailwindcss/06B6D4',
-  },
-  {
-    name: 'Node.js',
-    category: 'Backend',
-    icon: 'https://cdn.simpleicons.org/nodedotjs/5FA04E',
-  },
-  {
-    name: 'Express.js',
-    category: 'Backend',
-    icon: 'https://cdn.simpleicons.org/express/FFFFFF',
-  },
-  {
-    name: 'FastAPI',
-    category: 'Backend',
-    icon: 'https://cdn.simpleicons.org/fastapi/009688',
-  },
-  {
-    name: 'Flask',
-    category: 'Backend',
-    icon: 'https://cdn.simpleicons.org/flask/FFFFFF',
-  },
-  {
-    name: 'REST APIs',
-    category: 'Backend',
-    icon: 'https://cdn.simpleicons.org/postman/FF6C37',
-  },
-  {
-    name: 'JWT',
-    category: 'Backend',
-    icon: 'https://cdn.simpleicons.org/auth0/EB5424',
-  },
-  {
-    name: 'PostgreSQL',
-    category: 'Database',
-    icon: 'https://cdn.simpleicons.org/postgresql/4169E1',
-  },
-  {
-    name: 'MySQL',
-    category: 'Database',
-    icon: 'https://cdn.simpleicons.org/mysql/4479A1',
-  },
-  {
-    name: 'MongoDB',
-    category: 'Database',
-    icon: 'https://cdn.simpleicons.org/mongodb/47A248',
-  },
-  {
-    name: 'Supabase',
-    category: 'Tooling',
-    icon: 'https://cdn.simpleicons.org/supabase/3FCF8E',
-  },
-  {
-    name: 'TanStack Query',
-    category: 'Tooling',
-    icon: 'https://cdn.simpleicons.org/reactquery/FF4154',
-  },
-  {
-    name: 'Git',
-    category: 'Tooling',
-    icon: 'https://cdn.simpleicons.org/git/F05032',
-  },
-  {
-    name: 'Machine Learning',
-    category: 'AI/ML',
-    icon: 'https://cdn.simpleicons.org/scikitlearn/F7931E',
-  },
-  {
-    name: 'Figma',
-    category: 'Design',
-    icon: 'https://cdn.simpleicons.org/figma/F24E1E',
-  },
-  {
-    name: 'Canva',
-    category: 'Design',
-    icon: 'https://cdn.simpleicons.org/canva/00C4CC',
-  },
-]
+import { useState } from 'react'
+import { skillGroups, skillsIntro, skills } from '../data/content'
+import SectionAtmosphere from './SectionAtmosphere'
 
 const Skills = () => {
-  return (
-    <section id="skills" className="px-4 py-16 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-6xl">
-        <SectionHeader
-          badge="Skills"
-          title="Technical stack used across frontend, backend, and AI-enabled products"
-          subtitle="Languages, frameworks, databases, and tools I actively use for production-ready development."
-        />
+  const [active, setActive] = useState(null)
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {skillItems.map((skill, index) => (
-            <MotionArticle
-              key={skill.name}
+  return (
+    <section
+      id="skills"
+      className="relative overflow-hidden border-b border-grid px-6 py-28 md:px-8 md:py-36"
+    >
+      <SectionAtmosphere variant="wash" />
+
+      <div
+        aria-hidden
+        className="pointer-events-none absolute top-8 right-0 select-none font-display text-[clamp(8rem,22vw,18rem)] font-light leading-none text-ink/[0.04] md:top-4 md:right-8"
+      >
+        04
+      </div>
+
+      <div className="relative mx-auto max-w-6xl">
+        <div className="mb-16 flex flex-col gap-6 md:mb-20 md:flex-row md:items-end md:justify-between">
+          <div>
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className="mb-3 font-sans text-[12px] font-medium tracking-[0.18em] text-mute uppercase"
+            >
+              {skills.length} capabilities
+            </motion.p>
+            <motion.h2
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+              className="font-display text-[clamp(2.75rem,6vw,4.75rem)] font-light tracking-tight text-ink"
+            >
+              Skills
+            </motion.h2>
+          </div>
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="max-w-md font-sans text-[15px] font-light leading-[1.7] text-mute md:text-right md:text-[16px]"
+          >
+            {skillsIntro}
+          </motion.p>
+        </div>
+
+        <div className="space-y-12 md:space-y-16">
+          {skillGroups.map((group, groupIndex) => (
+            <motion.div
+              key={group.label}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.4, delay: index * 0.08 }}
-              className="glass-panel group flex items-center gap-4 p-4 transition duration-300 hover:-translate-y-1 hover:border-cyan-300/50"
+              viewport={{ once: true, amount: 0.25 }}
+              transition={{
+                duration: 0.55,
+                delay: groupIndex * 0.04,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className="grid gap-4 border-t border-ink/10 pt-6 md:grid-cols-[140px_1fr] md:gap-10 md:pt-8"
             >
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/15 bg-slate-900/80">
-                <img
-                  src={skill.icon}
-                  alt={`${skill.name} icon`}
-                  className="h-7 w-7 transition duration-300 group-hover:scale-110"
-                  loading="lazy"
-                />
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-white">{skill.name}</h3>
-                <p className="font-mono text-xs uppercase tracking-[0.18em] text-slate-400">
-                  {skill.category}
+              <div className="flex items-baseline gap-3 md:block">
+                <span className="font-sans text-[11px] tracking-[0.16em] text-mute">
+                  {String(groupIndex + 1).padStart(2, '0')}
+                </span>
+                <p className="font-sans text-[12px] font-medium tracking-[0.18em] text-ink uppercase md:mt-2">
+                  {group.label}
                 </p>
               </div>
-            </MotionArticle>
+
+              <ul className="flex flex-wrap items-baseline gap-x-3 gap-y-3 md:gap-x-4 md:gap-y-4">
+                {group.items.map((skill, skillIndex) => {
+                  const isDimmed = active !== null && active !== skill
+                  return (
+                    <li key={skill} className="flex items-baseline gap-x-3 md:gap-x-4">
+                      <button
+                        type="button"
+                        onMouseEnter={() => setActive(skill)}
+                        onMouseLeave={() => setActive(null)}
+                        onFocus={() => setActive(skill)}
+                        onBlur={() => setActive(null)}
+                        className="font-display text-[clamp(1.45rem,2.8vw,2.15rem)] font-light leading-none tracking-tight text-ink transition-[opacity,transform,color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 focus-visible:outline-none"
+                        style={{
+                          opacity: isDimmed ? 0.22 : 1,
+                        }}
+                      >
+                        {skill}
+                      </button>
+                      {skillIndex < group.items.length - 1 ? (
+                        <span
+                          aria-hidden
+                          className="select-none font-display text-xl font-light text-mute/40 md:text-2xl"
+                        >
+                          /
+                        </span>
+                      ) : null}
+                    </li>
+                  )
+                })}
+              </ul>
+            </motion.div>
           ))}
         </div>
       </div>

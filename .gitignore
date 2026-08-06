@@ -38,3 +38,8 @@ lerna-debug.log*
 # OS files
 .DS_Store
 Thumbs.db
+
+# Local resume / source docs (not for deploy)
+resume.pdf
+sumedh.pdf
+*.docx

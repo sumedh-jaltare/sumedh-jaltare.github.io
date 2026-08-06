@@ -1,92 +1,54 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
+import { navLinks } from '../data/content'
 
-const MotionHeader = motion.header
-
-const navLinks = [
-  { label: 'Home', href: '#hero' },
-  { label: 'About', href: '#about' },
-  { label: 'Skills', href: '#skills' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'GitHub', href: '#github' },
-  { label: 'Experience', href: '#experience' },
-  { label: 'Achievements', href: '#achievements' },
-  { label: 'Education', href: '#education' },
-  { label: 'Contact', href: '#contact' },
-]
-
-const Navbar = ({ theme, onToggleTheme }) => {
-  const [activeHref, setActiveHref] = useState('#hero')
+const Navbar = () => {
+  const [scrolled, setScrolled] = useState(false)
+  const [open, setOpen] = useState(false)
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveHref(`#${entry.target.id}`)
-          }
-        })
-      },
-      {
-        rootMargin: '-35% 0px -55% 0px',
-        threshold: 0.01,
-      },
-    )
-
-    navLinks.forEach(({ href }) => {
-      const section = document.querySelector(href)
-      if (section) {
-        observer.observe(section)
-      }
-    })
-
-    return () => observer.disconnect()
+    const onScroll = () => setScrolled(window.scrollY > 12)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
   const handleNavClick = (event, href) => {
-    if (!href.startsWith('#')) {
-      return
-    }
-
     const target = document.querySelector(href)
     if (!target) {
       return
     }
-
     event.preventDefault()
     target.scrollIntoView({ behavior: 'smooth', block: 'start' })
     window.history.replaceState(null, '', href)
-    setActiveHref(href)
+    setOpen(false)
   }
 
   return (
-    <MotionHeader
-      initial={{ y: -30, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5 }}
-      className="fixed inset-x-0 top-3 z-50 px-3 sm:px-6 lg:px-8"
+    <motion.header
+      initial={{ opacity: 0, y: -12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
+        scrolled ? 'bg-paper/90' : 'bg-transparent'
+      }`}
     >
-      <nav className="pointer-events-auto mx-auto w-full max-w-6xl rounded-2xl border border-white/15 bg-slate-950/70 px-4 py-4 shadow-[0_14px_50px_-20px_rgba(56,189,248,0.4)] backdrop-blur-2xl sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
+      <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5 md:px-8">
         <a
           href="#hero"
           onClick={(event) => handleNavClick(event, '#hero')}
-          className="font-mono text-sm font-semibold uppercase tracking-[0.22em] text-slate-100 transition hover:text-cyan-200"
+          className="font-sans text-[13px] font-medium tracking-[0.18em] text-ink uppercase"
         >
-          sumedh.j
+          Sumedh
         </a>
 
-        <ul className="hidden items-center gap-6 md:flex">
+        <ul className="hidden items-center gap-10 md:flex">
           {navLinks.map((link) => (
             <li key={link.href}>
               <a
                 href={link.href}
                 onClick={(event) => handleNavClick(event, link.href)}
-                className={`text-sm font-medium transition ${
-                  activeHref === link.href
-                    ? 'text-cyan-200'
-                    : 'text-slate-300 hover:text-cyan-200'
-                }`}
+                className="link-underline font-sans text-[13px] font-normal tracking-wide text-ink"
               >
                 {link.label}
               </a>
@@ -94,44 +56,35 @@ const Navbar = ({ theme, onToggleTheme }) => {
           ))}
         </ul>
 
-        <div className="flex items-center gap-2">
-          <button
-            type="button"
-            onClick={onToggleTheme}
-            className="rounded-full border border-white/20 bg-white/5 px-3 py-2 text-xs font-semibold uppercase tracking-[0.1em] text-slate-100 transition hover:border-cyan-300/60 hover:text-cyan-100"
-            aria-label="Toggle theme"
-          >
-            {theme === 'dark' ? 'Light' : 'Dark'}
-          </button>
-
-          <a
-            href="#contact"
-            onClick={(event) => handleNavClick(event, '#contact')}
-            className="hidden rounded-full border border-cyan-300/40 bg-cyan-400/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.15em] text-cyan-100 transition hover:border-cyan-200 hover:bg-cyan-300/20 sm:inline-flex"
-          >
-            Let's Connect
-          </a>
-        </div>
-        </div>
-
-      <div className="mt-3 flex gap-2 overflow-x-auto border-t border-white/10 pt-3 md:hidden [&::-webkit-scrollbar]:hidden">
-        {navLinks.map((link) => (
-          <a
-            key={link.href}
-            href={link.href}
-            onClick={(event) => handleNavClick(event, link.href)}
-            className={`whitespace-nowrap rounded-full border px-3 py-1.5 text-xs font-medium transition ${
-              activeHref === link.href
-                ? 'border-cyan-300/60 bg-cyan-400/15 text-cyan-100'
-                : 'border-white/10 bg-white/5 text-slate-200 hover:border-cyan-300/60 hover:text-cyan-100'
-            }`}
-          >
-            {link.label}
-          </a>
-        ))}
-      </div>
+        <button
+          type="button"
+          className="font-sans text-[13px] tracking-wide text-ink md:hidden"
+          onClick={() => setOpen((value) => !value)}
+          aria-expanded={open}
+          aria-label="Toggle navigation"
+        >
+          {open ? 'Close' : 'Menu'}
+        </button>
       </nav>
-    </MotionHeader>
+
+      {open && (
+        <div className="border-t border-grid bg-paper px-6 py-6 md:hidden">
+          <ul className="space-y-4">
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  onClick={(event) => handleNavClick(event, link.href)}
+                  className="font-display text-3xl font-light text-ink"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </motion.header>
   )
 }
 

@@ -1,94 +1,56 @@
-# Sumedh Jaltare Portfolio
+# Sumedh Jaltare — Portfolio
 
-Modern developer portfolio built with React + Vite and styled with Tailwind CSS.
+Editorial portfolio for Sumedh Jaltare. Built with React + Vite and Tailwind CSS, deployed to GitHub Pages.
 
-Live site: `https://sumedh-jaltare.github.io/`
+**Live:** [https://sumedh-jaltare.github.io/](https://sumedh-jaltare.github.io/)
 
-## Highlights
+## Features
 
-- Dark mode by default with a light mode toggle
-- Fully responsive, mobile-first layout
-- Smooth section animations with Framer Motion
-- Component-based architecture
-- GitHub profile and repository data integration
+- Light editorial layout (Cormorant Garamond + Inter)
+- Interactive hero grid and cursor whip line
+- Live GitHub repos + contribution graph
+- LeetCode stats + activity heatmap (synced via GitHub Actions)
+- Contact form that opens mail client
 
 ## Sections
 
-- Hero
-- About
-- Skills
-- Projects
-- GitHub
-- Experience
-- Achievements
-- Education
-- Contact
+Hero · About · Work · Experience · Skills · Contact
 
-## Tech Stack
+## Tech
 
 - React 19
 - Vite 8
 - Tailwind CSS 3
-- React Router (HashRouter)
 - Framer Motion
-- GitHub REST API
+- GitHub REST API + cached `public/activity.json`
 
-## Project Structure
-
-```text
-src/
-  components/
-  pages/
-  lib/
-  App.jsx
-  main.jsx
-.github/workflows/
-  static.yml
-```
-
-## Local Development
+## Develop
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open: `http://localhost:5173`
+Open: [http://localhost:5173](http://localhost:5173)
 
-## Available Scripts
+## Scripts
 
-- `npm run dev` - start local development server
-- `npm run build` - create production build in `dist/`
-- `npm run preview` - preview production build locally
-- `npm run lint` - run ESLint
-- `npm run deploy` - publish `dist/` using `gh-pages`
-
-## Environment Variables (Optional)
-
-Create a `.env` file if needed:
-
-```env
-VITE_GITHUB_USERNAME=sumedh-jaltare
-VITE_GITHUB_TOKEN=your_optional_github_token
-```
-
-- `VITE_GITHUB_USERNAME` defaults to `sumedh-jaltare`
-- `VITE_GITHUB_TOKEN` helps reduce GitHub API rate-limit issues
+| Script | Purpose |
+| --- | --- |
+| `npm run dev` | Local dev server |
+| `npm run build` | Production build |
+| `npm run sync:activity` | Refresh GitHub/LeetCode cache into `public/activity.json` |
+| `npm run preview` | Preview production build |
+| `npm run deploy` | Sync activity, build, publish to GitHub Pages |
 
 ## Deployment
 
-This repo includes two deployment paths:
+1. **GitHub Actions** (`.github/workflows/static.yml`) — builds and deploys `dist/` on pushes to `main`
+2. **Manual:** `npm run deploy`
 
-1. GitHub Actions Pages workflow:
-   - Workflow file: `.github/workflows/static.yml`
-   - Runs on pushes to `main`
-   - Builds with `npm run build` and deploys `dist/` to GitHub Pages
-2. Manual publish with `gh-pages`:
-   - Run `npm run deploy`
-   - Default target repo:
-     `https://github.com/sumedh-jaltare/sumedh-jaltare.github.io.git`
+Default pages repo: `https://github.com/sumedh-jaltare/sumedh-jaltare.github.io.git`
 
 ## Notes
 
-- Vite base path is configured as `/` in `vite.config.js`.
-- Router is configured with `HashRouter` in `src/main.jsx` for reliable GitHub Pages routing.
+- Vite `base` is `/` (user site root)
+- Local resume files (`resume.pdf`, `sumedh.pdf`, `*.docx`) are gitignored

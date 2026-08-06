@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "predeploy": "npm run build",
+    "sync:activity": "node scripts/sync-activity.mjs",
+    "predeploy": "npm run sync:activity && npm run build",
     "deploy": "gh-pages -d dist -r ${GH_PAGES_REPO:-https://github.com/sumedh-jaltare/sumedh-jaltare.github.io.git}",
     "lint": "eslint .",
     "preview": "vite preview"
