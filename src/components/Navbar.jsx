@@ -37,7 +37,7 @@ const Navbar = () => {
         <a
           href="#hero"
           onClick={(event) => handleNavClick(event, '#hero')}
-          className="font-sans text-[13px] font-medium tracking-[0.18em] text-ink uppercase"
+          className="font-sans text-[16px] font-semibold tracking-[0.18em] text-ink uppercase md:text-[17px]"
         >
           Sumedh
         </a>
