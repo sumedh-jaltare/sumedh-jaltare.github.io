@@ -1,9 +1,15 @@
 import { motion } from 'framer-motion'
+import { useState } from 'react'
 import { contact } from '../data/content'
 import SectionAtmosphere from './SectionAtmosphere'
 
+const fieldClass =
+  'w-full border border-white/20 bg-transparent px-4 py-3 font-sans text-[13px] text-paper outline-none transition placeholder:text-white/35 focus:border-paper disabled:opacity-60'
+
 const Footer = () => {
   const year = new Date().getFullYear()
+  const [status, setStatus] = useState('idle')
+  const [errorMessage, setErrorMessage] = useState('')
 
   const links = [
     { label: contact.email, href: `mailto:${contact.email}` },
@@ -12,20 +18,59 @@ const Footer = () => {
     { label: 'LinkedIn', href: contact.linkedin, external: true },
   ]
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
 
-    const formData = new FormData(event.currentTarget)
-    const name = formData.get('name')
-    const email = formData.get('email')
-    const message = formData.get('message')
+    const form = event.currentTarget
+    const formData = new FormData(form)
+    const name = String(formData.get('name') || '').trim()
+    const email = String(formData.get('email') || '').trim()
+    const message = String(formData.get('message') || '').trim()
 
-    const subject = encodeURIComponent(`Portfolio contact from ${name}`)
-    const body = encodeURIComponent(
-      `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
-    )
+    if (!name || !email || !message) {
+      return
+    }
 
-    window.location.href = `mailto:${contact.email}?subject=${subject}&body=${body}`
+    setStatus('sending')
+    setErrorMessage('')
+
+    try {
+      const response = await fetch(
+        `https://formsubmit.co/ajax/${encodeURIComponent(contact.email)}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify({
+            name,
+            email,
+            message,
+            _subject: `Portfolio contact from ${name}`,
+            _template: 'table',
+            _captcha: 'false',
+            _replyto: email,
+          }),
+        },
+      )
+
+      const payload = await response.json().catch(() => ({}))
+
+      if (!response.ok) {
+        throw new Error(payload.message || 'Unable to send message right now.')
+      }
+
+      form.reset()
+      setStatus('sent')
+    } catch (error) {
+      setStatus('error')
+      setErrorMessage(
+        error instanceof Error
+          ? error.message
+          : 'Unable to send message right now.',
+      )
+    }
   }
 
   return (
@@ -109,35 +154,61 @@ const Footer = () => {
               Send a message
             </p>
 
-            <div className="space-y-4">
-              <input
-                required
-                name="name"
-                type="text"
-                placeholder="Your name"
-                className="w-full border border-white/20 bg-transparent px-4 py-3 font-sans text-[13px] text-paper outline-none transition placeholder:text-white/35 focus:border-paper"
-              />
-              <input
-                required
-                name="email"
-                type="email"
-                placeholder="Your email"
-                className="w-full border border-white/20 bg-transparent px-4 py-3 font-sans text-[13px] text-paper outline-none transition placeholder:text-white/35 focus:border-paper"
-              />
-              <textarea
-                required
-                name="message"
-                rows={5}
-                placeholder="Your message"
-                className="w-full resize-y border border-white/20 bg-transparent px-4 py-3 font-sans text-[13px] text-paper outline-none transition placeholder:text-white/35 focus:border-paper"
-              />
-              <button
-                type="submit"
-                className="mt-1 w-full border border-paper bg-paper px-6 py-3 font-sans text-[11px] font-medium tracking-[0.14em] text-ink uppercase transition hover:bg-transparent hover:text-paper sm:w-auto"
-              >
-                Send message
-              </button>
-            </div>
+            {status === 'sent' ? (
+              <div className="space-y-4">
+                <p className="font-sans text-[14px] leading-relaxed font-light text-white/70">
+                  Message sent. I&apos;ll get back to you soon.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setStatus('idle')}
+                  className="border border-paper bg-paper px-6 py-3 font-sans text-[11px] font-medium tracking-[0.14em] text-ink uppercase transition hover:bg-transparent hover:text-paper"
+                >
+                  Send another
+                </button>
+              </div>
+            ) : (
+              <div className="space-y-4">
+                <input
+                  required
+                  name="name"
+                  type="text"
+                  placeholder="Your name"
+                  disabled={status === 'sending'}
+                  className={fieldClass}
+                />
+                <input
+                  required
+                  name="email"
+                  type="email"
+                  placeholder="Your email"
+                  disabled={status === 'sending'}
+                  className={fieldClass}
+                />
+                <textarea
+                  required
+                  name="message"
+                  rows={5}
+                  placeholder="Your message"
+                  disabled={status === 'sending'}
+                  className={`${fieldClass} resize-y`}
+                />
+
+                {status === 'error' ? (
+                  <p className="font-sans text-[12px] leading-relaxed text-white/65">
+                    {errorMessage || 'Something went wrong. Please try again.'}
+                  </p>
+                ) : null}
+
+                <button
+                  type="submit"
+                  disabled={status === 'sending'}
+                  className="mt-1 w-full border border-paper bg-paper px-6 py-3 font-sans text-[11px] font-medium tracking-[0.14em] text-ink uppercase transition hover:bg-transparent hover:text-paper disabled:cursor-wait disabled:opacity-70 sm:w-auto"
+                >
+                  {status === 'sending' ? 'Sending…' : 'Send message'}
+                </button>
+              </div>
+            )}
           </motion.form>
         </div>
 
