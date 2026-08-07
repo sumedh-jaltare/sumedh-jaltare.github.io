@@ -6,25 +6,25 @@ const Experience = () => {
   return (
     <section
       id="experience"
-      className="relative overflow-hidden border-b border-grid px-6 py-28 md:px-8 md:py-36"
+      className="relative overflow-hidden border-b border-grid px-4 py-16 sm:px-6 sm:py-24 md:px-8 md:py-36"
     >
       <SectionAtmosphere variant="mist" />
 
       <div
         aria-hidden
-        className="pointer-events-none absolute top-8 right-0 select-none font-display text-[clamp(8rem,22vw,18rem)] font-light leading-none text-ink/[0.04] md:top-4 md:right-8"
+        className="pointer-events-none absolute top-6 right-0 hidden select-none font-display text-[clamp(6rem,18vw,18rem)] font-light leading-none text-ink/[0.04] sm:block md:top-4 md:right-8"
       >
         03
       </div>
 
       <div className="relative mx-auto max-w-6xl">
-        <div className="mb-16 flex flex-col gap-6 md:mb-20 md:flex-row md:items-end md:justify-between">
+        <div className="mb-12 flex flex-col gap-5 sm:mb-16 md:mb-20 md:flex-row md:items-end md:justify-between">
           <div>
             <motion.p
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              className="mb-3 font-sans text-[12px] font-medium tracking-[0.18em] text-mute uppercase"
+              className="mb-3 font-sans text-[11px] font-medium tracking-[0.18em] text-mute uppercase sm:text-[12px]"
             >
               Timeline
             </motion.p>
@@ -33,7 +33,7 @@ const Experience = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-              className="font-display text-[clamp(2.75rem,6vw,4.75rem)] font-light tracking-tight text-ink"
+              className="font-display text-[clamp(2.4rem,8vw,4.75rem)] font-light tracking-tight text-ink"
             >
               Experience
             </motion.h2>
@@ -42,7 +42,7 @@ const Experience = () => {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="max-w-md font-sans text-[15px] font-light leading-[1.7] text-mute md:text-right md:text-[16px]"
+            className="max-w-md font-sans text-[14px] font-light leading-[1.7] text-mute sm:text-[15px] md:text-right md:text-[16px]"
           >
             {experienceIntro}
           </motion.p>
@@ -54,37 +54,37 @@ const Experience = () => {
             className="absolute top-3 bottom-3 left-[7px] w-px bg-ink/15 md:left-[9px]"
           />
 
-          <ul className="space-y-14 md:space-y-20">
+          <ul className="space-y-12 sm:space-y-14 md:space-y-20">
             {experienceItems.map((item, index) => (
               <motion.li
                 key={`${item.role}-${item.org}`}
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.35 }}
+                viewport={{ once: true, amount: 0.3 }}
                 transition={{
                   duration: 0.6,
                   delay: index * 0.06,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                className="group relative grid gap-3 pl-12 md:grid-cols-[200px_1fr] md:gap-14 md:pl-14"
+                className="group relative grid gap-3 pl-10 sm:pl-12 md:grid-cols-[180px_1fr] md:gap-14 md:pl-14 lg:grid-cols-[200px_1fr]"
               >
                 <span
                   aria-hidden
-                  className="absolute top-3 left-0 h-4 w-4 rounded-full border border-ink bg-paper transition-transform duration-300 group-hover:scale-125 md:top-4"
+                  className="absolute top-3 left-0 h-3.5 w-3.5 rounded-full border border-ink bg-paper transition-transform duration-300 group-hover:scale-125 sm:h-4 sm:w-4 md:top-4"
                 />
                 <span
                   aria-hidden
-                  className="absolute top-[18px] left-[5px] h-1.5 w-1.5 rounded-full bg-ink opacity-0 transition-opacity duration-300 group-hover:opacity-100 md:top-[22px] md:left-[7px]"
+                  className="absolute top-[17px] left-[4px] h-1.5 w-1.5 rounded-full bg-ink opacity-0 transition-opacity duration-300 group-hover:opacity-100 sm:top-[18px] sm:left-[5px] md:top-[22px] md:left-[7px]"
                 />
 
                 <div>
-                  <p className="font-display text-[clamp(1.75rem,3vw,2.35rem)] font-light leading-none tracking-tight text-ink/25 transition-colors duration-300 group-hover:text-ink/50">
+                  <p className="font-display text-[clamp(1.35rem,4vw,2.35rem)] font-light leading-none tracking-tight text-ink/25 transition-colors duration-300 group-hover:text-ink/50">
                     {item.period}
                   </p>
                 </div>
 
                 <div>
-                  <h3 className="font-display text-[clamp(2rem,4vw,3.25rem)] font-light leading-[1.05] tracking-tight text-ink transition duration-300 group-hover:-translate-y-0.5">
+                  <h3 className="font-display text-[clamp(1.65rem,5vw,3.25rem)] font-light leading-[1.1] tracking-tight text-ink transition duration-300 group-hover:-translate-y-0.5">
                     {item.role}
                   </h3>
                   <p className="mt-3 font-sans text-[13px] tracking-wide text-mute md:text-[14px]">

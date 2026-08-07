@@ -28,21 +28,24 @@ export const projects = [
   {
     title: 'AyuPlus',
     tech: 'React · TypeScript · Node.js · PostgreSQL · Supabase · Edge Functions · JWT',
-    href: 'https://github.com/sumedh-jaltare',
+    repo: 'AyuPlus',
+    href: 'https://github.com/sumedh-jaltare?tab=repositories',
     image:
       'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80',
   },
   {
     title: 'Patient-Centric Healthcare Platform',
     tech: 'FastAPI · Python · PostgreSQL · LLM APIs · Geolocation · Docker',
-    href: 'https://github.com/sumedh-jaltare',
+    repo: 'Patient-Centric-Healthcare-Platform',
+    href: 'https://github.com/sumedh-jaltare?tab=repositories',
     image:
       'https://images.unsplash.com/photo-1666214280557-f1b5022eb634?auto=format&fit=crop&w=1200&q=80',
   },
   {
     title: 'PDF Analyzer',
     tech: 'Python · FastAPI · REST APIs · PDF Parsing · Docker',
-    href: 'https://github.com/sumedh-jaltare',
+    repo: 'T400310859',
+    href: 'https://github.com/sumedh-jaltare/T400310859',
     image:
       'https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1200&q=80',
   },

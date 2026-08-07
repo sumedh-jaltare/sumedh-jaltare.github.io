@@ -6,16 +6,28 @@ const EXCLUDED_REPOS = new Set([
   'temporary',
 ])
 
-const mapRepo = (repo) => ({
-  name: repo.name,
-  description: repo.description || '',
-  language: repo.language || 'Other',
-  stars: repo.stargazers_count ?? repo.stars ?? 0,
-  forks: repo.forks_count ?? repo.forks ?? 0,
-  url: repo.html_url || repo.url,
-  updatedAt: repo.pushed_at || repo.updatedAt,
-  homepage: repo.homepage || '',
-})
+const mapRepo = (repo) => {
+  const name = repo.name
+  const htmlUrl =
+    repo.html_url ||
+    (typeof repo.url === 'string' &&
+    repo.url.includes('github.com') &&
+    !repo.url.includes('api.github.com')
+      ? repo.url
+      : null) ||
+    `https://github.com/${GITHUB_USER}/${name}`
+
+  return {
+    name,
+    description: repo.description || '',
+    language: repo.language || 'Other',
+    stars: repo.stargazers_count ?? repo.stars ?? 0,
+    forks: repo.forks_count ?? repo.forks ?? 0,
+    url: htmlUrl,
+    updatedAt: repo.pushed_at || repo.updatedAt,
+    homepage: repo.homepage || '',
+  }
+}
 
 export const fetchCachedActivity = async () => {
   const response = await fetch(`/activity.json?t=${Date.now()}`, {

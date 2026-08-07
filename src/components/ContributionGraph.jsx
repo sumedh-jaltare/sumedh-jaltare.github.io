@@ -62,25 +62,25 @@ const ContributionGraph = ({
   })
 
   return (
-    <div className="border border-grid p-5 md:p-6">
-      <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
+    <div className="border border-grid p-4 sm:p-5 md:p-6">
+      <div className="mb-4 flex flex-col gap-3 sm:mb-5 sm:flex-row sm:flex-wrap sm:items-end sm:justify-between">
         <div>
           {href ? (
             <a
               href={href}
               target="_blank"
               rel="noreferrer"
-              className="link-underline font-display text-xl font-light text-ink md:text-2xl"
+              className="link-underline font-display text-lg font-light text-ink sm:text-xl md:text-2xl"
             >
               {title}
             </a>
           ) : (
-            <p className="font-display text-xl font-light text-ink md:text-2xl">
+            <p className="font-display text-lg font-light text-ink sm:text-xl md:text-2xl">
               {title}
             </p>
           )}
           {subtitle ? (
-            <p className="mt-1 font-sans text-[13px] font-light text-mute">
+            <p className="mt-1 font-sans text-[12px] font-light text-mute sm:text-[13px]">
               {subtitle}
             </p>
           ) : null}
@@ -90,7 +90,7 @@ const ContributionGraph = ({
           {LEVEL_COLORS.map((color) => (
             <span
               key={color}
-              className="inline-block h-3 w-3 rounded-[2px]"
+              className="inline-block h-2.5 w-2.5 rounded-[2px] sm:h-3 sm:w-3"
               style={{ backgroundColor: color }}
             />
           ))}
@@ -98,28 +98,28 @@ const ContributionGraph = ({
         </div>
       </div>
 
-      <div className="overflow-x-auto">
+      <div className="-mx-1 overflow-x-auto px-1">
         <div className="min-w-max">
-          <div className="mb-1 flex gap-[3px] pl-0">
+          <div className="mb-1 flex gap-[2px] pl-0 sm:gap-[3px]">
             {monthLabels.map((label, index) => (
               <span
                 key={`month-${index}`}
-                className="w-3 text-left font-sans text-[10px] text-mute"
+                className="w-2.5 text-left font-sans text-[9px] text-mute sm:w-3 sm:text-[10px]"
               >
                 {label}
               </span>
             ))}
           </div>
-          <div className="inline-flex gap-[3px]">
+          <div className="inline-flex gap-[2px] sm:gap-[3px]">
             {weeks.map((week, weekIndex) => (
-              <div key={weekIndex} className="flex flex-col gap-[3px]">
+              <div key={weekIndex} className="flex flex-col gap-[2px] sm:gap-[3px]">
                 {Array.from({ length: 7 }, (_, dayIndex) => {
                   const day = week[dayIndex]
                   if (!day) {
                     return (
                       <span
                         key={`empty-${weekIndex}-${dayIndex}`}
-                        className="h-3 w-3 rounded-[2px] bg-transparent"
+                        className="h-2.5 w-2.5 rounded-[2px] bg-transparent sm:h-3 sm:w-3"
                       />
                     )
                   }
@@ -128,7 +128,7 @@ const ContributionGraph = ({
                     <span
                       key={day.date}
                       title={`${day.date}: ${day.count} ${day.count === 1 ? 'submission' : 'submissions'}`}
-                      className="h-3 w-3 rounded-[2px]"
+                      className="h-2.5 w-2.5 rounded-[2px] sm:h-3 sm:w-3"
                       style={{ backgroundColor: LEVEL_COLORS[level] }}
                     />
                   )

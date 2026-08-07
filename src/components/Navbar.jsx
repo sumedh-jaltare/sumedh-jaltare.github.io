@@ -33,7 +33,7 @@ const Navbar = () => {
         scrolled ? 'bg-paper/90' : 'bg-transparent'
       }`}
     >
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5 md:px-8">
+      <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6 sm:py-5 md:px-8">
         <a
           href="#hero"
           onClick={(event) => handleNavClick(event, '#hero')}
@@ -42,7 +42,7 @@ const Navbar = () => {
           Sumedh
         </a>
 
-        <ul className="hidden items-center gap-10 md:flex">
+        <ul className="hidden items-center gap-6 lg:flex lg:gap-10">
           {navLinks.map((link) => (
             <li key={link.href}>
               <a
@@ -58,7 +58,7 @@ const Navbar = () => {
 
         <button
           type="button"
-          className="font-sans text-[13px] tracking-wide text-ink md:hidden"
+          className="font-sans text-[13px] tracking-wide text-ink lg:hidden"
           onClick={() => setOpen((value) => !value)}
           aria-expanded={open}
           aria-label="Toggle navigation"
@@ -68,14 +68,14 @@ const Navbar = () => {
       </nav>
 
       {open && (
-        <div className="border-t border-grid bg-paper px-6 py-6 md:hidden">
+        <div className="border-t border-grid bg-paper px-4 py-6 sm:px-6 lg:hidden">
           <ul className="space-y-4">
             {navLinks.map((link) => (
               <li key={link.href}>
                 <a
                   href={link.href}
                   onClick={(event) => handleNavClick(event, link.href)}
-                  className="font-display text-3xl font-semibold text-ink"
+                  className="font-display text-[clamp(2rem,8vw,3rem)] font-semibold text-ink"
                 >
                   {link.label}
                 </a>

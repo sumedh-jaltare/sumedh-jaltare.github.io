@@ -1,6 +1,5 @@
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
-const CELL = 72
 const TRAIL_LENGTH = 10
 
 const COLORS = {
@@ -22,6 +21,12 @@ const COLORS = {
 
 const cellKey = (col, row) => `${col}-${row}`
 
+const getCellSize = (width) => {
+  if (width < 640) return 48
+  if (width < 1024) return 56
+  return 72
+}
+
 const getCellColor = (col, row, hover, trail) => {
   if (hover.col === col && hover.row === row) {
     return COLORS.active
@@ -35,19 +40,24 @@ const getCellColor = (col, row, hover, trail) => {
   return COLORS.idle
 }
 
-const GridCell = memo(function GridCell({ color }) {
+const GridCell = memo(function GridCell({ color, size }) {
   return (
     <div
       aria-hidden
       className="hero-grid-cell"
-      style={{ backgroundColor: color }}
+      style={{
+        backgroundColor: color,
+        width: size,
+        height: size,
+      }}
     />
   )
 })
 
 const HeroGrid = () => {
   const containerRef = useRef(null)
-  const [dims, setDims] = useState({ cols: 0, rows: 0 })
+  const cellSizeRef = useRef(72)
+  const [dims, setDims] = useState({ cols: 0, rows: 0, cell: 72 })
   const [hover, setHover] = useState({ col: -1, row: -1 })
   const [trail, setTrail] = useState([])
   const hoverRef = useRef(hover)
@@ -69,9 +79,12 @@ const HeroGrid = () => {
 
     const measure = () => {
       const { width, height } = el.getBoundingClientRect()
+      const cell = getCellSize(width)
+      cellSizeRef.current = cell
       setDims({
-        cols: Math.max(1, Math.ceil(width / CELL)),
-        rows: Math.max(1, Math.floor(height / CELL)),
+        cols: Math.max(1, Math.ceil(width / cell)),
+        rows: Math.max(1, Math.floor(height / cell)),
+        cell,
       })
     }
 
@@ -99,14 +112,15 @@ const HeroGrid = () => {
       const rect = el.getBoundingClientRect()
       const x = event.clientX - rect.left
       const y = event.clientY - rect.top
+      const cell = cellSizeRef.current
 
       if (x < 0 || y < 0 || x >= rect.width || y >= rect.height) {
         clearHover()
         return
       }
 
-      const col = Math.floor(x / CELL)
-      const row = Math.floor(y / CELL)
+      const col = Math.floor(x / cell)
+      const row = Math.floor(y / cell)
       const prev = hoverRef.current
 
       if (prev.col === col && prev.row === row) {
@@ -123,9 +137,7 @@ const HeroGrid = () => {
       setTrail((current) => {
         const next = [
           { col: prev.col, row: prev.row },
-          ...current.filter(
-            (cell) => !(cell.col === col && cell.row === row),
-          ),
+          ...current.filter((item) => !(item.col === col && item.row === row)),
         ]
         return next.slice(0, TRAIL_LENGTH)
       })
@@ -196,14 +208,14 @@ const HeroGrid = () => {
       className="hero-grid absolute inset-0"
       style={{
         gridTemplateColumns: dims.cols
-          ? `repeat(${dims.cols}, ${CELL}px)`
+          ? `repeat(${dims.cols}, ${dims.cell}px)`
           : undefined,
-        gridAutoRows: `${CELL}px`,
+        gridAutoRows: `${dims.cell}px`,
       }}
       aria-hidden
     >
       {cells.map((cell) => (
-        <GridCell key={cell.key} color={cell.color} />
+        <GridCell key={cell.key} color={cell.color} size={dims.cell} />
       ))}
     </div>
   )

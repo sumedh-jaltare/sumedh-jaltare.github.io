@@ -31,24 +31,24 @@ const Footer = () => {
   return (
     <footer
       id="contact"
-      className="relative overflow-hidden px-6 py-28 text-paper md:px-8 md:py-36"
+      className="relative overflow-hidden px-4 py-16 text-paper sm:px-6 sm:py-24 md:px-8 md:py-36"
     >
       <SectionAtmosphere variant="ink" />
 
       <div
         aria-hidden
-        className="pointer-events-none absolute top-6 right-0 select-none font-display text-[clamp(8rem,22vw,18rem)] font-light leading-none text-white/[0.04] md:top-2 md:right-8"
+        className="pointer-events-none absolute top-4 right-0 hidden select-none font-display text-[clamp(6rem,18vw,18rem)] font-light leading-none text-white/[0.04] sm:block md:top-2 md:right-8"
       >
         05
       </div>
 
       <div className="relative mx-auto max-w-6xl">
-        <div className="mb-14 md:mb-20">
+        <div className="mb-12 sm:mb-14 md:mb-20">
           <motion.p
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="mb-3 font-sans text-[12px] font-medium tracking-[0.18em] text-white/45 uppercase"
+            className="mb-3 font-sans text-[11px] font-medium tracking-[0.18em] text-white/45 uppercase sm:text-[12px]"
           >
             Next
           </motion.p>
@@ -57,7 +57,7 @@ const Footer = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="max-w-3xl font-display text-[clamp(3rem,8vw,6.5rem)] font-light leading-[0.95] tracking-tight text-paper"
+            className="max-w-3xl font-display text-[clamp(2.5rem,10vw,6.5rem)] font-light leading-[0.95] tracking-tight text-paper"
           >
             Let&apos;s build
             <br />
@@ -65,31 +65,31 @@ const Footer = () => {
           </motion.h2>
         </div>
 
-        <div className="grid gap-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-20">
+        <div className="grid gap-12 sm:gap-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-20">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           >
-            <p className="max-w-md font-sans text-[15px] font-light leading-[1.7] text-white/55 md:text-[16px]">
+            <p className="max-w-md font-sans text-[14px] font-light leading-[1.7] text-white/55 sm:text-[15px] md:text-[16px]">
               Open to internships, full-time roles, and collaborations. Based in{' '}
               {contact.location}.
             </p>
 
-            <div className="mt-10 flex flex-col gap-4">
+            <div className="mt-8 flex flex-col gap-4 sm:mt-10">
               {links.map((link, index) => (
                 <a
                   key={link.label}
                   href={link.href}
                   target={link.external ? '_blank' : undefined}
                   rel={link.external ? 'noreferrer' : undefined}
-                  className="group flex items-baseline gap-4 border-b border-white/15 pb-3 transition hover:border-white/40"
+                  className="group flex items-baseline gap-3 border-b border-white/15 pb-3 transition hover:border-white/40 sm:gap-4"
                 >
-                  <span className="font-sans text-[11px] tracking-[0.14em] text-white/35">
+                  <span className="shrink-0 font-sans text-[11px] tracking-[0.14em] text-white/35">
                     {String(index + 1).padStart(2, '0')}
                   </span>
-                  <span className="font-display text-[clamp(1.35rem,2.5vw,1.85rem)] font-light tracking-tight text-paper transition group-hover:translate-x-1">
+                  <span className="min-w-0 break-all font-display text-[clamp(1.15rem,4vw,1.85rem)] font-light tracking-tight text-paper transition group-hover:translate-x-1">
                     {link.label}
                   </span>
                 </a>
@@ -103,9 +103,9 @@ const Footer = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-            className="border border-white/15 p-6 md:p-8"
+            className="border border-white/15 p-5 sm:p-6 md:p-8"
           >
-            <p className="mb-6 font-display text-2xl font-light tracking-tight text-paper md:text-3xl">
+            <p className="mb-5 font-display text-xl font-light tracking-tight text-paper sm:mb-6 sm:text-2xl md:text-3xl">
               Send a message
             </p>
 
@@ -133,7 +133,7 @@ const Footer = () => {
               />
               <button
                 type="submit"
-                className="mt-1 border border-paper bg-paper px-6 py-3 font-sans text-[11px] font-medium tracking-[0.14em] text-ink uppercase transition hover:bg-transparent hover:text-paper"
+                className="mt-1 w-full border border-paper bg-paper px-6 py-3 font-sans text-[11px] font-medium tracking-[0.14em] text-ink uppercase transition hover:bg-transparent hover:text-paper sm:w-auto"
               >
                 Send message
               </button>
@@ -141,7 +141,7 @@ const Footer = () => {
           </motion.form>
         </div>
 
-        <p className="mt-20 font-sans text-xs tracking-wide text-white/35">
+        <p className="mt-14 font-sans text-xs tracking-wide text-white/35 sm:mt-20">
           © {year} Sumedh Jaltare
         </p>
       </div>
