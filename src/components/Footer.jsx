@@ -1,6 +1,10 @@
 import { motion } from 'framer-motion'
-import { useState } from 'react'
-import { contact } from '../data/content'
+import { useEffect, useRef, useState } from 'react'
+import { contact, resumeHref } from '../data/content'
+import {
+  recordSuccessfulSend,
+  validateContactSubmission,
+} from '../lib/contactGuard'
 import SectionAtmosphere from './SectionAtmosphere'
 
 const fieldClass =
@@ -8,14 +12,20 @@ const fieldClass =
 
 const Footer = () => {
   const year = new Date().getFullYear()
+  const openedAtRef = useRef(Date.now())
   const [status, setStatus] = useState('idle')
   const [errorMessage, setErrorMessage] = useState('')
+
+  useEffect(() => {
+    openedAtRef.current = Date.now()
+  }, [])
 
   const links = [
     { label: contact.email, href: `mailto:${contact.email}` },
     { label: contact.phone, href: contact.phoneHref },
     { label: 'GitHub', href: contact.github, external: true },
     { label: 'LinkedIn', href: contact.linkedin, external: true },
+    { label: 'Resume', href: resumeHref, external: true },
   ]
 
   const handleSubmit = async (event) => {
@@ -26,8 +36,24 @@ const Footer = () => {
     const name = String(formData.get('name') || '').trim()
     const email = String(formData.get('email') || '').trim()
     const message = String(formData.get('message') || '').trim()
+    const honey = String(formData.get('company_website') || '').trim()
 
-    if (!name || !email || !message) {
+    const guard = validateContactSubmission({
+      name,
+      email,
+      message,
+      honey,
+      openedAt: openedAtRef.current,
+    })
+
+    if (!guard.ok) {
+      if (guard.silent) {
+        setStatus('sent')
+        form.reset()
+        return
+      }
+      setStatus('error')
+      setErrorMessage(guard.reason)
       return
     }
 
@@ -50,6 +76,7 @@ const Footer = () => {
             _subject: `Portfolio contact from ${name}`,
             _template: 'table',
             _captcha: 'false',
+            _honey: '',
             _replyto: email,
           }),
         },
@@ -58,17 +85,22 @@ const Footer = () => {
       const payload = await response.json().catch(() => ({}))
 
       if (!response.ok) {
-        throw new Error(payload.message || 'Unable to send message right now.')
+        throw new Error(
+          payload.message ||
+            'Unable to send right now. If this is the first message from the live site, check your inbox for a FormSubmit activation email.',
+        )
       }
 
+      recordSuccessfulSend()
       form.reset()
+      openedAtRef.current = Date.now()
       setStatus('sent')
     } catch (error) {
       setStatus('error')
       setErrorMessage(
         error instanceof Error
           ? error.message
-          : 'Unable to send message right now.',
+          : 'Unable to send message right now. You can also email jaltaresr@gmail.com directly.',
       )
     }
   }
@@ -148,7 +180,7 @@ const Footer = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-            className="border border-white/15 p-5 sm:p-6 md:p-8"
+            className="relative border border-white/15 p-5 sm:p-6 md:p-8"
           >
             <p className="mb-5 font-display text-xl font-light tracking-tight text-paper sm:mb-6 sm:text-2xl md:text-3xl">
               Send a message
@@ -161,7 +193,10 @@ const Footer = () => {
                 </p>
                 <button
                   type="button"
-                  onClick={() => setStatus('idle')}
+                  onClick={() => {
+                    openedAtRef.current = Date.now()
+                    setStatus('idle')
+                  }}
                   className="border border-paper bg-paper px-6 py-3 font-sans text-[11px] font-medium tracking-[0.14em] text-ink uppercase transition hover:bg-transparent hover:text-paper"
                 >
                   Send another
@@ -169,11 +204,26 @@ const Footer = () => {
               </div>
             ) : (
               <div className="space-y-4">
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -left-[9999px] h-0 w-0 overflow-hidden opacity-0"
+                >
+                  <label htmlFor="company_website">Company website</label>
+                  <input
+                    id="company_website"
+                    name="company_website"
+                    type="text"
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
+                </div>
+
                 <input
                   required
                   name="name"
                   type="text"
                   placeholder="Your name"
+                  maxLength={80}
                   disabled={status === 'sending'}
                   className={fieldClass}
                 />
@@ -182,6 +232,7 @@ const Footer = () => {
                   name="email"
                   type="email"
                   placeholder="Your email"
+                  maxLength={120}
                   disabled={status === 'sending'}
                   className={fieldClass}
                 />
@@ -190,6 +241,8 @@ const Footer = () => {
                   name="message"
                   rows={5}
                   placeholder="Your message"
+                  minLength={20}
+                  maxLength={4000}
                   disabled={status === 'sending'}
                   className={`${fieldClass} resize-y`}
                 />
