@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { heroIntro } from '../data/content'
+import { heroIntro, resumeHref } from '../data/content'
 import HeroGrid from './HeroGrid'
 
 const lineVariants = {
@@ -30,35 +30,63 @@ const Hero = () => {
 
       <div className="relative z-[2] mx-auto flex w-full max-w-6xl flex-1 flex-col justify-center px-4 pb-20 pt-8 sm:px-6 sm:pb-24 md:px-8 md:pb-28 md:pt-0">
         <div className="grid items-start gap-8 md:grid-cols-[minmax(0,1.2fr)_minmax(0,0.65fr)] md:gap-16">
-          <h1 className="max-w-xl font-display font-light leading-[0.95] tracking-tightest text-ink">
-            <motion.span
-              custom={0}
-              variants={lineVariants}
-              initial="hidden"
-              animate="show"
-              className="block text-[clamp(2.1rem,8vw,4.75rem)]"
+          <div>
+            <h1 className="max-w-xl font-display font-light leading-[0.95] tracking-tightest text-ink">
+              <motion.span
+                custom={0}
+                variants={lineVariants}
+                initial="hidden"
+                animate="show"
+                className="block text-[clamp(2.1rem,8vw,4.75rem)]"
+              >
+                Hello,
+              </motion.span>
+              <motion.span
+                custom={1}
+                variants={lineVariants}
+                initial="hidden"
+                animate="show"
+                className="mt-2 block text-[clamp(2.1rem,8vw,4.75rem)]"
+              >
+                I&apos;m Sumedh Jaltare
+              </motion.span>
+              <motion.span
+                custom={2}
+                variants={lineVariants}
+                initial="hidden"
+                animate="show"
+                className="mt-5 block text-[clamp(1.25rem,4.5vw,2.4rem)] text-ink/75 sm:mt-6"
+              >
+                Full-Stack Software Engineer
+              </motion.span>
+            </h1>
+
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.55,
+                delay: 0.55,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className="mt-8 flex flex-wrap items-center gap-3 sm:mt-10"
             >
-              Hello,
-            </motion.span>
-            <motion.span
-              custom={1}
-              variants={lineVariants}
-              initial="hidden"
-              animate="show"
-              className="mt-2 block text-[clamp(2.1rem,8vw,4.75rem)]"
-            >
-              I&apos;m Sumedh Jaltare
-            </motion.span>
-            <motion.span
-              custom={2}
-              variants={lineVariants}
-              initial="hidden"
-              animate="show"
-              className="mt-5 block text-[clamp(1.25rem,4.5vw,2.4rem)] text-ink/75 sm:mt-6"
-            >
-              Full-Stack Software Engineer
-            </motion.span>
-          </h1>
+              <a
+                href="#work"
+                className="border border-ink bg-ink px-5 py-2.5 font-sans text-[11px] font-medium tracking-[0.14em] text-paper uppercase transition hover:bg-paper hover:text-ink"
+              >
+                View work
+              </a>
+              <a
+                href={resumeHref}
+                target="_blank"
+                rel="noreferrer"
+                className="border border-ink/25 px-5 py-2.5 font-sans text-[11px] font-medium tracking-[0.14em] text-ink uppercase transition hover:border-ink"
+              >
+                Resume
+              </a>
+            </motion.div>
+          </div>
 
           <motion.p
             initial={{ opacity: 0, y: 16 }}
@@ -74,7 +102,6 @@ const Hero = () => {
           </motion.p>
         </div>
       </div>
-
     </section>
   )
 }
