@@ -75,21 +75,6 @@ const Hero = () => {
         </div>
       </div>
 
-      <motion.a
-        href="#about"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.1, duration: 0.6 }}
-        className="absolute bottom-6 left-4 z-[2] flex items-center gap-3 font-sans text-[11px] tracking-[0.18em] text-mute uppercase sm:bottom-8 sm:left-6 md:left-8"
-      >
-        <motion.span
-          aria-hidden
-          animate={{ y: [0, 6, 0] }}
-          transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
-          className="inline-block h-8 w-px bg-ink/30"
-        />
-        Scroll
-      </motion.a>
     </section>
   )
 }
