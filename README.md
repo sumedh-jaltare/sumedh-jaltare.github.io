@@ -1,16 +1,17 @@
 # Sumedh Jaltare — Portfolio
 
-Editorial portfolio for Sumedh Jaltare. Built with React + Vite and Tailwind CSS, deployed to GitHub Pages.
+Editorial portfolio built with React + Vite and Tailwind CSS, deployed to GitHub Pages.
 
 **Live:** [https://sumedh-jaltare.github.io/](https://sumedh-jaltare.github.io/)
 
 ## Features
 
 - Light editorial layout (Cormorant Garamond + Inter)
-- Interactive hero grid and cursor whip line
-- Live GitHub repos + contribution graph
+- Interactive hero grid and cursor whip line (desktop only; respects reduced motion)
+- Curated GitHub repos + contribution graph
 - LeetCode stats + activity heatmap (synced via GitHub Actions)
-- Contact form that opens mail client
+- Contact form sent through FormSubmit, with honeypot / rate-limit spam guards
+- Hosted resume PDF + Open Graph share image
 
 ## Sections
 
@@ -23,6 +24,25 @@ Hero · About · Work · Experience · Skills · Contact
 - Tailwind CSS 3
 - Framer Motion
 - GitHub REST API + cached `public/activity.json`
+- FormSubmit (contact)
+
+## Project structure
+
+```text
+src/
+  components/     # Sections and UI
+  data/content.js # Copy, projects, selected repos, contact
+  lib/            # GitHub activity + contact spam guards
+  pages/Home.jsx
+public/
+  activity.json
+  Sumedh-Jaltare-Resume.pdf
+  og.png
+  favicon.svg
+.github/workflows/
+  static.yml          # Build + deploy dist/ on push to main
+  sync-activity.yml   # Refresh activity.json on a schedule
+```
 
 ## Develop
 
@@ -37,20 +57,31 @@ Open: [http://localhost:5173](http://localhost:5173)
 
 | Script | Purpose |
 | --- | --- |
-| `npm run dev` | Local dev server |
-| `npm run build` | Production build |
-| `npm run sync:activity` | Refresh GitHub/LeetCode cache into `public/activity.json` |
-| `npm run preview` | Preview production build |
-| `npm run deploy` | Sync activity, build, publish to GitHub Pages |
+| `npm run dev` | Local development server |
+| `npm run build` | Production build → `dist/` |
+| `npm run sync:activity` | Refresh GitHub/LeetCode data into `public/activity.json` |
+| `npm run preview` | Preview the production build |
+| `npm run deploy` | Optional manual publish via `gh-pages` |
 
 ## Deployment
 
-1. **GitHub Actions** (`.github/workflows/static.yml`) — builds and deploys `dist/` on pushes to `main`
-2. **Manual:** `npm run deploy`
+Preferred path: **GitHub Actions**
 
-Default pages repo: `https://github.com/sumedh-jaltare/sumedh-jaltare.github.io.git`
+1. Repo **Settings → Pages → Source** = **GitHub Actions**
+2. Push to `main`
+3. Workflow builds `dist/` and deploys it
+
+Manual alternative: `npm run deploy` (publishes to the `gh-pages` branch; only needed if Pages is still set to that branch).
+
+## Contact form
+
+Messages go to `jaltaresr@gmail.com` via [FormSubmit](https://formsubmit.co).
+
+- First live submit may require activating a confirmation email from FormSubmit
+- Client-side spam guards: honeypot field, minimum fill time, per-browser rate limits, basic content checks
 
 ## Notes
 
 - Vite `base` is `/` (user site root)
-- Local resume files (`resume.pdf`, `sumedh.pdf`, `*.docx`) are gitignored
+- Draft resumes at repo root (`resume.pdf`, `sumedh.pdf`, `*.docx`) are gitignored
+- Hosted resume for the site: `public/Sumedh-Jaltare-Resume.pdf`
