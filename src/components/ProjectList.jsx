@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useMemo, useState } from 'react'
-import { projects, workIntro } from '../data/content'
+import { projects, selectedRepos, workIntro } from '../data/content'
 import { loadActivity } from '../lib/activityApi'
 import ContributionGraph from './ContributionGraph'
 import SectionAtmosphere from './SectionAtmosphere'
@@ -102,6 +102,11 @@ const FeaturedRow = ({
         <p className="mt-3 max-w-lg font-sans text-[12px] font-light leading-relaxed tracking-wide text-mute md:text-[13px]">
           {project.tech}
         </p>
+        {project.summary ? (
+          <p className="mt-2 max-w-xl font-sans text-[13px] font-light leading-relaxed text-ink/70 md:text-[14px]">
+            {project.summary}
+          </p>
+        ) : null}
       </div>
 
       <div className="relative hidden h-[100px] overflow-hidden md:block lg:h-[120px]">
@@ -158,17 +163,25 @@ const ProjectList = () => {
 
   const github = activity?.github
   const leetcode = activity?.leetcode
-  const repos = github?.repos || []
-  const visibleRepos = showAllRepos ? repos : repos.slice(0, 4)
-  const hiddenCount = Math.max(0, repos.length - 4)
+  const allRepos = github?.repos || []
+  const curatedRepos = useMemo(() => {
+    return selectedRepos
+      .map((name) =>
+        allRepos.find((repo) => repo.name.toLowerCase() === name.toLowerCase()),
+      )
+      .filter(Boolean)
+  }, [allRepos])
+
+  const visibleRepos = showAllRepos ? curatedRepos : curatedRepos.slice(0, 5)
+  const hiddenCount = Math.max(0, curatedRepos.length - 5)
 
   const featured = useMemo(
     () =>
       projects.map((project) => ({
         ...project,
-        href: resolveProjectHref(project, repos),
+        href: resolveProjectHref(project, allRepos),
       })),
-    [repos],
+    [allRepos],
   )
 
   return (
@@ -240,7 +253,7 @@ const ProjectList = () => {
           <div className="mb-6 flex flex-col gap-2 sm:mb-8 sm:flex-row sm:flex-wrap sm:items-end sm:justify-between sm:gap-3">
             <div>
               <p className="font-sans text-[11px] font-medium tracking-[0.18em] text-mute uppercase sm:text-[12px]">
-                GitHub repositories
+                Selected repositories
               </p>
               <a
                 href={github?.url || 'https://github.com/sumedh-jaltare'}
@@ -294,7 +307,7 @@ const ProjectList = () => {
             ))}
           </ul>
 
-          {repos.length > 4 ? (
+          {curatedRepos.length > 5 ? (
             <button
               type="button"
               onClick={() => setShowAllRepos((value) => !value)}
@@ -305,6 +318,15 @@ const ProjectList = () => {
                 : `See more (${hiddenCount} more)`}
             </button>
           ) : null}
+
+          <a
+            href={github?.url || 'https://github.com/sumedh-jaltare?tab=repositories'}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-4 inline-block font-sans text-[13px] tracking-wide text-mute transition hover:text-ink"
+          >
+            View all on GitHub ↗
+          </a>
 
           <div className="mt-8 sm:mt-10">
             <ContributionGraph

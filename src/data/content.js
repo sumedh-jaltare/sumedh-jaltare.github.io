@@ -6,28 +6,32 @@ export const navLinks = [
   { label: 'Contact', href: '#contact' },
 ]
 
+export const resumeHref = '/Sumedh-Jaltare-Resume.pdf'
+
 export const heroIntro =
-  'Full-stack software engineer building scalable, production-ready web applications with React, Node.js, FastAPI, and PostgreSQL. National hackathon winner with hands-on experience in system design, LLM integration, and cloud deployment.'
+  'Building production web systems with React, FastAPI, and PostgreSQL. National hackathon winner — open to internships and full-time roles.'
 
 export const workIntro =
-  'Selected projects spanning multi-clinic healthcare systems, AI-assisted triage platforms, and document automation—built end-to-end with a focus on architecture, security, and real-world delivery.'
+  'A short list of shipped systems and selected public repositories — healthcare platforms, automation tools, and full-stack products.'
 
 export const skillsIntro =
-  'Languages, frameworks, and tooling I use across frontend, backend, databases, cloud, and ML—from React and FastAPI to PostgreSQL, Docker, and LLM-assisted pipelines.'
+  'Languages, frameworks, and tooling across frontend, backend, databases, cloud, and ML.'
 
 export const experienceIntro =
-  'Leadership and execution across design, media, and technical roles—coordinating teams, shipping systems, and presenting architecture to judges and industry audiences.'
+  'Leadership and execution across design, media, and technical roles — coordinating teams and shipping under real deadlines.'
 
 export const aboutParagraphs = [
-  'Full-stack software engineer experienced in building scalable, production-ready web applications with React, Node.js, FastAPI, and PostgreSQL. National hackathon winner with hands-on exposure to system design, LLM integration, and cloud deployment.',
-  'Recent work includes AyuPlus, a multi-clinic management platform with multi-tenant PostgreSQL security, and an AI-assisted healthcare platform that won Best Solution among 50+ teams at AISSMS Hackathon 2026.',
-  'Alongside engineering, I lead design and media for campus and national technical events—coordinating teams, shipping promotional systems, and presenting full-stack architecture to industry judges.',
+  'I design and ship full-stack products end to end: clear architecture, secure data models, and interfaces people can actually use.',
+  'Recent work includes AyuPlus, a multi-clinic platform with multi-tenant PostgreSQL security, and an AI-assisted healthcare system that won Best Solution among 50+ teams at AISSMS Hackathon 2026.',
+  'Outside class, I lead design and media for campus and national tech events — coordinating teams, shipping promotional systems, and presenting architecture to industry judges.',
 ]
 
 export const projects = [
   {
     title: 'AyuPlus',
     tech: 'React · TypeScript · Node.js · PostgreSQL · Supabase · Edge Functions · JWT',
+    summary:
+      'Multi-clinic management with tenant-isolated PostgreSQL security, role-based access, and production-ready auth.',
     repo: 'AyuPlus',
     href: 'https://github.com/sumedh-jaltare?tab=repositories',
     image:
@@ -36,6 +40,8 @@ export const projects = [
   {
     title: 'Patient-Centric Healthcare Platform',
     tech: 'FastAPI · Python · PostgreSQL · LLM APIs · Geolocation · Docker',
+    summary:
+      'AI-assisted triage and care routing. Best Solution Award, AISSMS Hackathon 2026 (50+ teams).',
     repo: 'Patient-Centric-Healthcare-Platform',
     href: 'https://github.com/sumedh-jaltare?tab=repositories',
     image:
@@ -44,11 +50,24 @@ export const projects = [
   {
     title: 'PDF Analyzer',
     tech: 'Python · FastAPI · REST APIs · PDF Parsing · Docker',
+    summary:
+      'Document parsing API used in Adobe India Hackathon 2025 (Round 2 among 4,000 teams).',
     repo: 'T400310859',
     href: 'https://github.com/sumedh-jaltare/T400310859',
     image:
       'https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1200&q=80',
   },
+]
+
+/** Public repos worth showing on the portfolio (ordered). */
+export const selectedRepos = [
+  'TaskSphere',
+  'VoteCompass',
+  'Job-Hunt-Portal',
+  'job-applicationtracker',
+  'System-Prompt-vs.-Custom-RAG-Strategy',
+  'GAN-implementation',
+  'T400310859',
 ]
 
 export const experienceItems = [

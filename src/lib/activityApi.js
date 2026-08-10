@@ -4,7 +4,23 @@ const EXCLUDED_REPOS = new Set([
   'sumedh-jaltare',
   'sumedh-jaltare.github.io',
   'temporary',
+  'weather-app',
+  'rock_paper_scissor_game',
+  'minigames',
+  'tailwind-project',
+  'Wad',
+  '3D-visualization',
 ])
+
+const SELECTED_REPO_ORDER = [
+  'TaskSphere',
+  'VoteCompass',
+  'Job-Hunt-Portal',
+  'job-applicationtracker',
+  'System-Prompt-vs.-Custom-RAG-Strategy',
+  'GAN-implementation',
+  'T400310859',
+]
 
 const mapRepo = (repo) => {
   const name = repo.name
@@ -83,13 +99,25 @@ export const fetchLiveGitHub = async () => {
     totalContributions,
     streak,
     calendar,
-    repos: repos
-      .filter((repo) => !repo.fork && !EXCLUDED_REPOS.has(repo.name))
-      .sort(
-        (a, b) =>
-          new Date(b.pushed_at).getTime() - new Date(a.pushed_at).getTime(),
-      )
-      .map(mapRepo),
+    repos: (() => {
+      const mapped = repos
+        .filter((repo) => !repo.fork && !EXCLUDED_REPOS.has(repo.name))
+        .map(mapRepo)
+
+      const selected = SELECTED_REPO_ORDER.map((name) =>
+        mapped.find((repo) => repo.name === name),
+      ).filter(Boolean)
+
+      const selectedNames = new Set(selected.map((repo) => repo.name))
+      const extras = mapped
+        .filter((repo) => !selectedNames.has(repo.name))
+        .sort(
+          (a, b) =>
+            new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime(),
+        )
+
+      return [...selected, ...extras]
+    })(),
   }
 }
 
