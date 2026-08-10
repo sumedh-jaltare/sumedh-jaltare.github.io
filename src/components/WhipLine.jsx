@@ -7,8 +7,9 @@ const WhipLine = () => {
   const canvasRef = useRef(null)
 
   useEffect(() => {
-    const media = window.matchMedia('(pointer: fine)')
-    if (!media.matches) {
+    const finePointer = window.matchMedia('(pointer: fine)')
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+    if (!finePointer.matches || reduceMotion.matches) {
       return undefined
     }
 
