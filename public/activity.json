@@ -1,12 +1,12 @@
 {
-  "updatedAt": "2026-08-11T07:17:19.989Z",
+  "updatedAt": "2026-08-11T13:18:52.989Z",
   "github": {
     "username": "sumedh-jaltare",
     "url": "https://github.com/sumedh-jaltare",
     "publicRepos": 18,
     "followers": 4,
     "following": 2,
-    "totalContributions": 98,
+    "totalContributions": 101,
     "streak": 1,
     "calendar": [
       {
@@ -557,12 +557,12 @@
       {
         "date": "2026-04-20",
         "count": 5,
-        "level": 3
+        "level": 2
       },
       {
         "date": "2026-04-21",
         "count": 2,
-        "level": 2
+        "level": 1
       },
       {
         "date": "2026-04-22",
@@ -582,7 +582,7 @@
       {
         "date": "2026-04-25",
         "count": 2,
-        "level": 2
+        "level": 1
       },
       {
         "date": "2026-04-26",
@@ -1022,7 +1022,7 @@
       {
         "date": "2026-07-22",
         "count": 6,
-        "level": 4
+        "level": 3
       },
       {
         "date": "2026-07-23",
@@ -1102,12 +1102,12 @@
       {
         "date": "2026-08-07",
         "count": 6,
-        "level": 4
+        "level": 3
       },
       {
         "date": "2026-08-08",
         "count": 2,
-        "level": 2
+        "level": 1
       },
       {
         "date": "2026-08-09",
@@ -1121,7 +1121,7 @@
       },
       {
         "date": "2026-08-11",
-        "count": 7,
+        "count": 10,
         "level": 4
       },
       {
@@ -3668,8 +3668,8 @@
         "stars": 0,
         "forks": 0,
         "url": "https://github.com/sumedh-jaltare/HHG-Task",
-        "updatedAt": "2026-08-11T07:14:17Z",
-        "homepage": ""
+        "updatedAt": "2026-08-11T09:10:27Z",
+        "homepage": "https://hhg-task.vercel.app"
       },
       {
         "name": "GAN-implementation",
@@ -3806,7 +3806,7 @@
   "leetcode": {
     "username": "Sumedh_Jaltare",
     "url": "https://leetcode.com/u/Sumedh_Jaltare/",
-    "ranking": 1397432,
+    "ranking": 1398537,
     "totalSolved": 119,
     "easy": 69,
     "medium": 44,
