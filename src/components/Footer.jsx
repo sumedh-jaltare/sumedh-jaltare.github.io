@@ -6,6 +6,37 @@ import {
   validateContactSubmission,
 } from '../lib/contactGuard'
 import SectionAtmosphere from './SectionAtmosphere'
+import SocialButton, { SOCIAL_ICONS } from './SocialButton'
+
+const SITE_URL = 'https://sumedh-jaltare.github.io/'
+const SHARE_TEXT = 'Sumedh Jaltare — Full-Stack Software Engineer'
+
+const shareItems = [
+  {
+    id: 'x',
+    icon: SOCIAL_ICONS.x,
+    label: 'Share on X',
+    href: `https://twitter.com/intent/tweet?text=${encodeURIComponent(SHARE_TEXT)}&url=${encodeURIComponent(SITE_URL)}`,
+  },
+  {
+    id: 'linkedin',
+    icon: SOCIAL_ICONS.linkedin,
+    label: 'Share on LinkedIn',
+    href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(SITE_URL)}`,
+  },
+  {
+    id: 'github',
+    icon: SOCIAL_ICONS.github,
+    label: 'Open GitHub',
+    href: contact.github,
+  },
+  {
+    id: 'leetcode',
+    icon: SOCIAL_ICONS.leetcode,
+    label: 'Open LeetCode',
+    href: contact.leetcode,
+  },
+]
 
 const fieldClass =
   'w-full border border-white/20 bg-transparent px-4 py-3 font-sans text-[13px] text-paper outline-none transition placeholder:text-white/35 focus:border-paper disabled:opacity-60'
@@ -265,9 +296,12 @@ const Footer = () => {
           </motion.form>
         </div>
 
-        <p className="mt-14 font-sans text-xs tracking-wide text-white/35 sm:mt-20">
-          © {year} Sumedh Jaltare
-        </p>
+        <div className="mt-14 flex flex-col gap-6 border-t border-white/10 pt-8 sm:mt-20 sm:flex-row sm:items-center sm:justify-between">
+          <p className="font-sans text-xs tracking-wide text-white/35">
+            © {year} Sumedh Jaltare
+          </p>
+          <SocialButton label="Share" items={shareItems} />
+        </div>
       </div>
     </footer>
   )

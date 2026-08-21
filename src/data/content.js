@@ -178,5 +178,6 @@ export const contact = {
   phoneHref: 'tel:+919765586498',
   github: 'https://github.com/sumedh-jaltare',
   linkedin: 'https://www.linkedin.com/in/sumedh-jaltare/',
+  leetcode: 'https://leetcode.com/u/Sumedh_Jaltare/',
   location: 'Pune, MH',
 }
