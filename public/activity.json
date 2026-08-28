@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-27T22:06:49.369Z",
+  "updatedAt": "2026-08-28T10:55:55.577Z",
   "github": {
     "username": "sumedh-jaltare",
     "url": "https://github.com/sumedh-jaltare",
@@ -3796,7 +3796,7 @@
   "leetcode": {
     "username": "Sumedh_Jaltare",
     "url": "https://leetcode.com/u/Sumedh_Jaltare/",
-    "ranking": 1288341,
+    "ranking": 1289077,
     "totalSolved": 132,
     "easy": 76,
     "medium": 50,
@@ -3804,11 +3804,6 @@
     "streak": 10,
     "totalActiveDays": 85,
     "calendar": [
-      {
-        "date": "2025-08-22",
-        "count": 0,
-        "level": 0
-      },
       {
         "date": "2025-08-23",
         "count": 0,
@@ -5658,6 +5653,11 @@
         "date": "2026-08-27",
         "count": 1,
         "level": 1
+      },
+      {
+        "date": "2026-08-28",
+        "count": 0,
+        "level": 0
       }
     ]
   }
